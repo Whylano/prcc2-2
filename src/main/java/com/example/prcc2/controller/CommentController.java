@@ -18,7 +18,7 @@ public class CommentController {
     }
     //특정 게시물 댓글 조회
     @GetMapping
-    public CommonRes<?> getAll(@PathVariable("post_id") Long postId){
+    public CommonRes<?> getAllByPostId(@PathVariable("post_id") Long postId){
         return new CommonRes<>(true,null);
     }
 

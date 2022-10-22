@@ -20,4 +20,5 @@ public class CommentResDto {
         this.author = comment.getMember().getNickname(); //이건 문제가 발생할 수 있음!!
         this.createdAt = comment.getCreatedAt().toLocalDateTime();
     }
+
 }

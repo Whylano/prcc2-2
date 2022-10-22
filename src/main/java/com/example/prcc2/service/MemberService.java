@@ -1,9 +1,17 @@
 package com.example.prcc2.service;
 
+import com.example.prcc2.dto.SigninReqDto;
 import com.example.prcc2.dto.SignupReqDto;
+import com.example.prcc2.dto.TokenDto;
 import com.example.prcc2.entity.Member;
 import com.example.prcc2.repository.MemberRepository;
+import com.example.prcc2.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class MemberService {
     private MemberRepository memberRepository;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder; //Authentication을 구성할 수 있는 애다(만들어 줄수 있는애다)
+
+    private final TokenProvider tokentProvider;
     //1.닉네임이 중복되었는지
     //2.비밀번호와 비밀번호 확인이 동일한지
     //3.회원가입
@@ -23,6 +34,24 @@ public class MemberService {
         Member member = dto.toEntity();
         memberRepository.save(member);                                          //회원가입 기능
     }
+    //로그인 기능 구현
+    //1.로그인 구현 - 아이디, 비밀번호를 받아서 검증 후 토큰 생성 후 반환
+    public TokenDto login(SigninReqDto dto) {
+
+        //인증이 되어있지 않은 Authentication 객체 생성
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(dto.getNickname(), dto.getPassword());
+
+        //인증에 필요한 authentication manager를 authenticationManagerBuilder를 통해 얻어온다.
+        AuthenticationManager authenticationManager = authenticationManagerBuilder.getObject();  //참고자료: https://iseunghan.tistory.com/m/368
+
+        //Authentication Manager에게 넘겨주어 인증을 진행하고, 인증에 성공하면 인증에 성공한 인증 객체를 반환한다.
+        Authentication authenticated = authenticationManager.authenticate(authentication);
+
+        TokenDto tokenDto = tokentProvider.generateToken(authenticated);
+        return tokenDto;
+    }
+    
+    
 //if문으로 쓰는 것 보다 메소드로 만들어준다음 상속받을 수 있게 합니다.
     private void validateNicknameDuplicated(String nickname){  //필요한 값만 (String nickname)을 받아옵니다.
         boolean existsByNickname = memberRepository.existsByNickname(nickname);

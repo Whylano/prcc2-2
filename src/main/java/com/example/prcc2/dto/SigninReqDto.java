@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class SigninReqDto {
-
+    //아이디
     private String nickname;
-
+    //비밀번호
     private String password;
 }
