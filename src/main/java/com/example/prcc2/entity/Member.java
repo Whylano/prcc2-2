@@ -11,8 +11,6 @@ import javax.persistence.*;
 @Entity //
 public class Member extends TimeEntity{
 
-
-
     @GeneratedValue(strategy = GenerationType.IDENTITY) //아이디를 자동으로 생성할지 수기로 생성할지 작성함
     @Id
     private Long id;

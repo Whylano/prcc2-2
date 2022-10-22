@@ -43,7 +43,7 @@ public class MemberService {
 
         //인증에 필요한 authentication manager를 authenticationManagerBuilder를 통해 얻어온다.
         AuthenticationManager authenticationManager = authenticationManagerBuilder.getObject();  //참고자료: https://iseunghan.tistory.com/m/368
-
+        //---------(authenticated 구문과 authentication을 잘 구분해서 써야한다!!!주의필요)-----------
         //Authentication Manager에게 넘겨주어 인증을 진행하고, 인증에 성공하면 인증에 성공한 인증 객체를 반환한다.
         Authentication authenticated = authenticationManager.authenticate(authentication);
 

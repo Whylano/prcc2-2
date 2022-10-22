@@ -14,6 +14,7 @@ public class CommentController {
 
     @PostMapping
     public CommonRes<?> create(@PathVariable("post_id") Long postId, @RequestBody CommentReqDto dto){
+        commentService.create(postId,dto);
         return new CommonRes<>(true,null);
     }
     //특정 게시물 댓글 조회

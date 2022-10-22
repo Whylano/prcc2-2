@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
-
     private final CommentRepository commentRepository;
     //1.게시글 작성
     //2.게시글 전체 조회
@@ -30,11 +29,11 @@ public class PostService {
     //4. 게시글 수정
     //5. 게시글 삭제
     @Transactional
-    //안에서 데이터 변경이 필요할 것같다 할때 안에서 써줘야함
+    //(Transactional)안에서 데이터 변경이 필요할 것같다 할때 안에서 써줘야함
     //게시글을 생성하기 위해서는 뭐가 필요할까요?-Post entity안에 생성자를 봅시다!!!- title, content, member
     public void create(PostReqDto dto){//회원가입을 할때 Controller에서 Member객체 타입 dto를 인자값으로 가져옵니다
 
-        //(member가 없으니 )현재 로그인한 멤버의 아이를 가져온다.//SecurityUill에거 가져옴
+        //(member가 없으니)현재 로그인한 멤버의 아이를 가져온다.//SecurityUill에게 가져옴
         Long memberId = SecurityUtill.getCurrentMemberId();
 
         Member member = memberRepository.findById(memberId).orElseThrow(//repository에서 멤버 아이디를 준비합니다..orElseThrow로 해당아이디가 아니면 던져라
