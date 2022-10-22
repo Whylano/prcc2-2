@@ -33,4 +33,16 @@ public class Comment extends TimeEntity{
         this.content = content;
 
     }
+    public void update(String content){
+
+        this.content = content;
+    }
+
+    public boolean checkOwnerByMemberId(Long memberId){
+
+        return this.member.getId().equals(memberId);
+    }
+    public boolean checkPostByPostId(Long postId) {
+        return post.getId().equals(postId);
+    }
 }

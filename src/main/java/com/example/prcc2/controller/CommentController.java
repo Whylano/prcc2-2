@@ -27,15 +27,21 @@ public class CommentController {
         return new CommonRes<>(true,resDtos);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public CommonRes<?> update(@PathVariable("post_id") Long postId,
-                               @PathVariable("id")Long commentId,
-                               @RequestBody CommentReqDto dto){
-        return new CommonRes<>(true,null);
+                               @PathVariable("comment_id") Long commentId,
+                               @RequestBody CommentReqDto dto) {
+
+        commentService.update(postId, commentId, dto);
+        return new CommonRes<>(true, null);
     }
+
     @DeleteMapping("/{comment_id}")
-    public CommonRes<?> delete(@PathVariable("post_id")Long postId,
-                              @PathVariable("comment_id")Long commentId){
-        return new CommonRes<>(true,null);
+    public CommonRes<?> delete(@PathVariable("post_id") Long postId,
+                               @PathVariable("comment_id") Long commentId){
+
+        commentService.delete(postId, commentId);
+        return new CommonRes<>(true, null);
     }
+
 }

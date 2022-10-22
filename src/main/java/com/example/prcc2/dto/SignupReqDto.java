@@ -2,7 +2,6 @@ package com.example.prcc2.dto;
 
 import com.example.prcc2.entity.Member;
 import lombok.Data;
-import lombok.Getter;
 @Data
 public class SignupReqDto {
 
