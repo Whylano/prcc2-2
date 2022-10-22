@@ -26,7 +26,7 @@ public class Comment extends TimeEntity{
     private Post post;
 
 
-    public Comment(Member member,Post post,String content) {
+    public Comment(Member member,Post post,String content) {//**CommentReqDto에서 오류가 뜨면 여기의 순서를 확인할 것!
 
         this.member = member;
         this.post = post;

@@ -3,7 +3,7 @@ package com.example.prcc2.dto;
 import com.example.prcc2.entity.Comment;
 
 import java.time.LocalDateTime;
-
+//Comment 라는 Entity에서 -> dto로 바꿔주는 단이라 생성자를 생성해줘야함
 public class CommentResDto {
 
     private  Long id;

@@ -29,7 +29,7 @@ public class Post extends TimeEntity{
     @JoinColumn(name = "MEMBER_ID", nullable = false)
     private Member member;
 
-    public Post(Member member, String title, String content){ //생성자.
+    public Post(Member member, String title, String content){ //생성자. //순서를 주의해야함
 
         this.member = member;
         this.title = title;     //this, new 차이 찾아보기

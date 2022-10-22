@@ -1,5 +1,5 @@
 package com.example.prcc2.dto;
-
+//로그인 DTO
 import lombok.Data;
 
 @Data

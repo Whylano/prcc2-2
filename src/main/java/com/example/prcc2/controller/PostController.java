@@ -13,7 +13,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    public CommonRes<?> create(){
+    public CommonRes<?> create(@RequestBody PostReqDto dto){
         return new CommonRes<>(true,null);
     }
     @GetMapping
@@ -25,7 +25,7 @@ public class PostController {
         return new CommonRes<>(true,null);
     }
     @PutMapping("/{id}")
-    public CommonRes<?> update(@PathVariable("id") Long id, @RequestBody PostReqDto dto){
+        public CommonRes<?> update(@PathVariable("id") Long id, @RequestBody PostReqDto dto){
         return new CommonRes<>(true, null);
     }
     @DeleteMapping("/{id}")
