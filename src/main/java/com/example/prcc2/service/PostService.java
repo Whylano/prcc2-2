@@ -8,7 +8,7 @@ import com.example.prcc2.entity.Post;
 import com.example.prcc2.repository.CommentRepository;
 import com.example.prcc2.repository.MemberRepository;
 import com.example.prcc2.repository.PostRepository;
-import com.example.prcc2.utill.SecurityUtill;
+import com.example.prcc2.utill.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +34,7 @@ public class PostService {
     public void create(PostReqDto dto){//회원가입을 할때 Controller에서 Member객체 타입 dto를 인자값으로 가져옵니다
 
         //(member가 없으니)현재 로그인한 멤버의 아이를 가져온다.//SecurityUill에게 가져옴
-        Long memberId = SecurityUtill.getCurrentMemberId();
+        Long memberId = SecurityUtil.getCurrentMemberId();
 
         Member member = memberRepository.findById(memberId).orElseThrow(//repository에서 멤버 아이디를 준비합니다..orElseThrow로 해당아이디가 아니면 던져라
                 () -> new IllegalArgumentException("해당 아이디를 가진 멤버의 아이디가 없습니다.")
@@ -79,7 +79,7 @@ public class PostService {
                 () -> new IllegalArgumentException("해당 아이디를 가진 게시글이 존재하지 않습니다.")
         );
 
-        checkOwner(post, SecurityUtill.getCurrentMemberId()); /***로그인한 사람의 아이디를 가져오는 역활****/
+        checkOwner(post, SecurityUtil.getCurrentMemberId()); /***로그인한 사람의 아이디를 가져오는 역활****/
 
         //2.
         post.update(dto.getTitle(),dto.getContent());
@@ -95,7 +95,7 @@ public class PostService {
                 ()->new IllegalArgumentException("해당 아이디를 가진 게시글이 존재하지 않습니다.")
         );
 
-        checkOwner(post, SecurityUtill.getCurrentMemberId());
+        checkOwner(post, SecurityUtil.getCurrentMemberId());
         //댓글 삭제
         commentRepository.deleteAllByPostId(post.getId());
         //게시글 삭제

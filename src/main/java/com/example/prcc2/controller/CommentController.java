@@ -1,10 +1,13 @@
 package com.example.prcc2.controller;
 
 import com.example.prcc2.dto.CommentReqDto;
+import com.example.prcc2.dto.CommentResDto;
 import com.example.prcc2.dto.CommonRes;
 import com.example.prcc2.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,7 +23,8 @@ public class CommentController {
     //특정 게시물 댓글 조회
     @GetMapping
     public CommonRes<?> getAllByPostId(@PathVariable("post_id") Long postId){
-        return new CommonRes<>(true,null);
+        List<CommentResDto> resDtos = commentService.readAll(postId);
+        return new CommonRes<>(true,resDtos);
     }
 
     @PutMapping("/{id}")

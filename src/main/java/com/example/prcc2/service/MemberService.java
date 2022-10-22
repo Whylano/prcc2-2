@@ -11,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +21,7 @@ public class MemberService {
     private MemberRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder; //Authentication을 구성할 수 있는 애다(만들어 줄수 있는애다)
 
-    private final TokenProvider tokentProvider;
+    private final TokenProvider tokenProvider;
     //1.닉네임이 중복되었는지
     //2.비밀번호와 비밀번호 확인이 동일한지
     //3.회원가입
@@ -47,7 +46,7 @@ public class MemberService {
         //Authentication Manager에게 넘겨주어 인증을 진행하고, 인증에 성공하면 인증에 성공한 인증 객체를 반환한다.
         Authentication authenticated = authenticationManager.authenticate(authentication);
 
-        TokenDto tokenDto = tokentProvider.generateToken(authenticated);
+        TokenDto tokenDto = tokenProvider.generateToken(authenticated);
         return tokenDto;
     }
     

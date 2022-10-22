@@ -16,7 +16,7 @@ public class PostResDto {
     private String content;
 
     private LocalDateTime createdAt;
-//Post타입에서 PostResDto타입으로 가져올꺼기 때문에  Post post를 인자로 받아준다.
+    //Post타입에서 PostResDto타입으로 가져올꺼기 때문에  Post post를 인자로 받아준다.
     public PostResDto(Post post){
         this.id = post.getId();
         this.title = post.getTitle();
