@@ -3,7 +3,9 @@ package com.example.prcc2.dto;
 // success: true
 // date :[]
 
+import lombok.Getter;
 
+@Getter
 public class CommonRes <T>{
     private Boolean success;
 

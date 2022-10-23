@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MemberService {
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder; //Authentication을 구성할 수 있는 애다(만들어 줄수 있는애다)
-
+    private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
     //1.닉네임이 중복되었는지
     //2.비밀번호와 비밀번호 확인이 동일한지
@@ -29,8 +30,8 @@ public class MemberService {
     public void signup(SignupReqDto dto){ //request body에 있는 정보인 dto 정보를 가져옵니다.
         validateNicknameDuplicated(dto.getNickname());                          //작성한 메소드를 사용하며 dto에 있는 nickname()을 가져와get줍니다.여기서 문제가 생기면 밑으로 내려오지않는다. 이유는 메소드에 예외처리를 했기 때문입니다.
         validatePasswordEquals(dto.getPassword(), dto.getPasswordCheck());      //여기도 마찬가지로 작성한 메소드를 사용합니다.
-
-        Member member = dto.toEntity();
+        String encodePw = passwordEncoder.encode(dto.getPassword());
+        Member member = dto.toEntity(encodePw);
         memberRepository.save(member);                                          //회원가입 기능
     }
     //로그인 기능 구현

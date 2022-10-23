@@ -72,7 +72,7 @@ public class CommentService {
         comment.update(dto.getContent());
 
 //3.변경된 데이터를 데이터베이스에 저장합니다
-        commentRepository.save(comment); //???? 왜 지웠지?
+        commentRepository.save(comment);
     }
 
     //댓글 삭제

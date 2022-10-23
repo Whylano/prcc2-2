@@ -1,7 +1,9 @@
 package com.example.prcc2.dto;
 
 import com.example.prcc2.entity.Member;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+@AllArgsConstructor
 @Data
 public class SignupReqDto {
 
@@ -17,7 +19,7 @@ public class SignupReqDto {
     // Member member = new Member(signupReqDto.getNikcnake(),...);을 따로 코드로 계속 만들어줘야하지만
     //toEntity()로 만들어주면 Member.java내용을 이용해 new Member안에 생성자 값을 넣어줘서 쉽게 활용한다.
 
-    public Member toEntity(){
-        return new Member(this.nickname, this.password);
+    public Member toEntity(String encodedPassword){
+        return new Member(this.nickname, encodedPassword);
     }
 }

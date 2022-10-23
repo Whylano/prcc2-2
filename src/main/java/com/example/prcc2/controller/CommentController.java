@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/posts/{post_id}/comments")
 public class CommentController {
-    private CommentService commentService;
+    private final CommentService commentService;
 
     @PostMapping
     public CommonRes<?> create(@PathVariable("post_id") Long postId, @RequestBody CommentReqDto dto){
@@ -27,7 +27,7 @@ public class CommentController {
         return new CommonRes<>(true,resDtos);
     }
 
-    @PutMapping
+    @PutMapping("/{comment_id}")
     public CommonRes<?> update(@PathVariable("post_id") Long postId,
                                @PathVariable("comment_id") Long commentId,
                                @RequestBody CommentReqDto dto) {

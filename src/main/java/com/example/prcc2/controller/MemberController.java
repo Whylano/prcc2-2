@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/api/members")
 public class MemberController {
 //컨트롤러를 작성할때 서비스가 없으니 껍대기 값을 먼저 작성하기
-    private MemberService memberService; //(타입/변수명)
+    private final MemberService memberService; //(타입/변수명)
 
     @PostMapping("/signup")//설정한 api에서 @PostMapping()안에 url을 제외하고 HTTP 메소드를 작성함
     //                                      앞에가 타입 뒤에가 변수명 dto 입니다 알아보기 쉽게 변수명을 설정했습니다.
